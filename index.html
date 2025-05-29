@@ -5,37 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>鄭伊健演唱會抽獎登記</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(to right, #1e1e2f, #2c3e50);
       color: white;
       font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
     }
     .hero {
       text-align: center;
       padding: 80px 20px 40px;
-       background-image: url('images/poster.png');
+      background-image: url('images/poster.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      animation: fadeIn 2s ease-out;
     }
     .overlay {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 40px;
       border-radius: 10px;
+      animation: fadeInUp 1s ease-out;
     }
     .form-section, .thank-you {
       display: none;
       padding: 20px;
+      animation: fadeIn 1s ease-in;
     }
     .visible {
       display: block;
+    }
+    .btn-warning {
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-warning:hover {
+      background: #ffc107;
+      transform: scale(1.05);
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
   </style>
 </head>
 <body>
   <div class="hero">
-    <div class="overlay">
+    <div class="overlay animate__animated animate__fadeInUp">
       <h1 class="display-5">🎤 鄭伊健 HERE & NOW 2025</h1>
       <p class="lead">多倫多站演唱會抽獎登記</p>
     </div>
@@ -43,7 +64,7 @@
 
   <div class="container mt-4">
     <!-- Disclaimer Section -->
-    <div id="disclaimer" class="form-section visible">
+    <div id="disclaimer" class="form-section visible animate__animated animate__fadeIn">
       <h4>📜 參加條款</h4>
       <p>本活動僅作推廣用途，並由活動主辦單位負責。參加者所提供的資料（包括姓名、電話、電郵地址）只用於聯絡中獎者及發放演唱會資訊，不會作任何商業用途或轉售。</p>
       <div class="form-check">
@@ -54,7 +75,7 @@
     </div>
 
     <!-- Draw Info + Form -->
-    <div id="formSection" class="form-section">
+    <div id="formSection" class="form-section animate__animated animate__fadeIn">
       <h4>🎁 抽獎詳情</h4>
       <ul>
         <li>📍 地點：The Theatre at Great Canadian Toronto</li>
@@ -85,7 +106,7 @@
     </div>
 
     <!-- Thank You Message -->
-    <div id="thankYou" class="form-section text-center">
+    <div id="thankYou" class="form-section text-center animate__animated animate__fadeIn">
       <h4>🎉 感謝您的登記！</h4>
       <p>我們已收到您的資料，請留意您的電郵通知中獎結果。</p>
     </div>
@@ -104,7 +125,6 @@
     document.getElementById('drawForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // Collect data
       const data = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
@@ -113,10 +133,8 @@
         timestamp: new Date().toISOString()
       };
 
-      // TODO: Send to Firebase here (to be added)
       console.log('Collected:', data);
 
-      // Show thank you
       document.getElementById('formSection').classList.remove('visible');
       document.getElementById('thankYou').classList.add('visible');
     });
