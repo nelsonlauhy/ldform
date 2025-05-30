@@ -5,9 +5,9 @@ exports.handler = async (event) => {
     const { firstName, lastName, email, phone } = JSON.parse(event.body);
 
     const transporter = nodemailer.createTransport({
-      host: "mail.redms.ca",
-      port: 25,
-      secure: false,
+      host: "smtp.oxcs.bluehost.com",
+      port: 587,
+      secure: true,
       auth: {
         user: "info@redms.ca",
         pass: "Qwedcxz225@#$@"
