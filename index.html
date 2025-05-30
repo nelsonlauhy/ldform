@@ -49,12 +49,7 @@
       background: #ffc107;
       transform: scale(1.05);
     }
-    .disclaimer-box {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 15px;
-      border-radius: 8px;
-      max-height: 300px;
+    200px
       overflow-y: scroll;
       font-size: 0.95rem;
       margin-bottom: 15px;
@@ -66,8 +61,12 @@
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
-    }
-  </style>
+    }@media (min-width: 768px) {
+  .disclaimer-box {
+    max-height: 300px;
+  }
+}
+</style>
 </head>
 <body>
   <div class="hero">
