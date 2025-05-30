@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>鄭伊健演唱會抽獎登記</title>
+  <title>Ekin Cheng Concert Lucky Draw</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <style>
@@ -57,58 +57,67 @@
 <body>
   <div class="hero">
     <div class="overlay animate__animated animate__fadeInUp">
-      <h1 class="display-5">🎤 鄭伊健 HERE & NOW 2025</h1>
-      <p class="lead">多倫多站演唱會抽獎登記</p>
+      <h1 class="display-5">🎤 Ekin Cheng HERE & NOW 2025</h1>
+      <p class="lead">Toronto Concert Lucky Draw Registration</p>
     </div>
   </div>
 
   <div class="container mt-4">
     <!-- Disclaimer Section -->
     <div id="disclaimer" class="form-section visible animate__animated animate__fadeIn">
-      <h4>📜 參加條款</h4>
-      <p>本活動僅作推廣用途，並由活動主辦單位負責。參加者所提供的資料（包括姓名、電話、電郵地址）只用於聯絡中獎者及發放演唱會資訊，不會作任何商業用途或轉售。</p>
+      <h4>📜 Lucky Draw Disclaimer</h4>
+      <p>By participating in this lucky draw, you agree to the following terms:</p>
+      <ol>
+        <li><strong>Purpose:</strong> This lucky draw is organized for promotional purposes in connection with the "Ekin Cheng – HERE & NOW 2025" Toronto concert.</li>
+        <li><strong>Eligibility:</strong> Participation is open to individuals residing in Canada who are 18 years or older. Only one entry per person is allowed.</li>
+        <li><strong>Prize:</strong> The winner will receive 2 VIP concert tickets for the Toronto show on June 28, 2025. The prize has no cash value and cannot be exchanged or transferred.</li>
+        <li><strong>Use of Personal Information:</strong> Your submitted information (name, phone number, and email) will only be used for the purpose of this lucky draw and for notifying the winner. It will not be shared with third parties or used for any commercial purposes.</li>
+        <li><strong>Winner Notification:</strong> The winner will be selected at random and notified by email on June 18, 2025. If the winner does not respond within 48 hours, the prize will be forfeited and another winner will be selected.</li>
+        <li><strong>Organizer Rights:</strong> The organizer reserves the right to cancel or modify the draw at any time without prior notice, especially in the case of technical issues or fraudulent activity.</li>
+        <li><strong>Agreement:</strong> By checking the box below and submitting your information, you confirm that you have read, understood, and agreed to these terms.</li>
+      </ol>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="agreeCheck">
-        <label class="form-check-label" for="agreeCheck">我已閱讀並同意以上條款</label>
+        <label class="form-check-label" for="agreeCheck">I have read and agree to the above terms</label>
       </div>
-      <button class="btn btn-light mt-3" onclick="showForm()">下一步</button>
+      <button class="btn btn-light mt-3" onclick="showForm()">Next</button>
     </div>
 
     <!-- Draw Info + Form -->
     <div id="formSection" class="form-section animate__animated animate__fadeIn">
-      <h4>🎁 抽獎詳情</h4>
+      <h4>🎁 Lucky Draw Details</h4>
       <ul>
-        <li>📍 地點：The Theatre at Great Canadian Toronto</li>
-        <li>📆 日期：2025年6月28日 晚上8時</li>
-        <li>🎟 獎品：2張 VIP 門票（總值 $300）</li>
-        <li>⏰ 截止登記：2025年6月15日</li>
+        <li>📍 Venue: The Theatre at Great Canadian Toronto</li>
+        <li>📆 Date: June 28, 2025 at 8:00 PM</li>
+        <li>🎟 Prize: 2 VIP Tickets (Total Value: $300)</li>
+        <li>⏰ Entry Deadline: June 15, 2025</li>
       </ul>
       <hr />
       <form id="drawForm">
         <div class="mb-3">
-          <label class="form-label">姓氏</label>
+          <label class="form-label">Last Name</label>
           <input type="text" class="form-control" id="lastName" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">名字</label>
+          <label class="form-label">First Name</label>
           <input type="text" class="form-control" id="firstName" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">電話</label>
+          <label class="form-label">Phone Number</label>
           <input type="tel" class="form-control" id="phone" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">電郵</label>
+          <label class="form-label">Email Address</label>
           <input type="email" class="form-control" id="email" required>
         </div>
-        <button type="submit" class="btn btn-warning">提交登記</button>
+        <button type="submit" class="btn btn-warning">Submit</button>
       </form>
     </div>
 
     <!-- Thank You Message -->
     <div id="thankYou" class="form-section text-center animate__animated animate__fadeIn">
-      <h4>🎉 感謝您的登記！</h4>
-      <p>我們已收到您的資料，請留意您的電郵通知中獎結果。</p>
+      <h4>🎉 Thank You for Registering!</h4>
+      <p>Your entry has been received. Please check your email for winner announcement updates.</p>
     </div>
   </div>
 
@@ -118,7 +127,7 @@
         document.getElementById('disclaimer').classList.remove('visible');
         document.getElementById('formSection').classList.add('visible');
       } else {
-        alert('請先勾選同意條款');
+        alert('Please agree to the terms before continuing.');
       }
     }
 
