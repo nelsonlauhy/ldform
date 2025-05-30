@@ -111,25 +111,14 @@
         <li>Entry Deadline: June 15, 2025</li>
       </ul>
       <hr />
-      <form id="drawForm">
-        <div class="mb-3">
-          <label class="form-label">Last Name</label>
-          <input type="text" class="form-control" id="lastName" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">First Name</label>
-          <input type="text" class="form-control" id="firstName" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-control" id="phone" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="email" required>
-        </div>
+
+      <form action="https://formspree.io/f/xovwajqw" method="POST">
+        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+        <input type="tel" name="phone" class="form-control" placeholder="Phone" required>
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
         <button type="submit" class="btn btn-warning">Submit</button>
-      </form>
+        </form>
     </div>
 
     <!-- Thank You Message -->
