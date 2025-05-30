@@ -44,6 +44,16 @@
       background: #ffc107;
       transform: scale(1.05);
     }
+    .disclaimer-box {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 15px;
+      border-radius: 8px;
+      max-height: 300px;
+      overflow-y: scroll;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
     @keyframes fadeInUp {
       from {opacity: 0; transform: translateY(30px);}
       to {opacity: 1; transform: translateY(0);}
@@ -66,16 +76,18 @@
     <!-- Disclaimer Section -->
     <div id="disclaimer" class="form-section visible animate__animated animate__fadeIn">
       <h4>📜 Lucky Draw Disclaimer</h4>
-      <p>By participating in this lucky draw, you agree to the following terms:</p>
-      <ol>
-        <li><strong>Purpose:</strong> This lucky draw is organized for promotional purposes in connection with the "Ekin Cheng – HERE & NOW 2025" Toronto concert.</li>
-        <li><strong>Eligibility:</strong> Participation is open to individuals residing in Canada who are 18 years or older. Only one entry per person is allowed.</li>
-        <li><strong>Prize:</strong> The winner will receive 2 VIP concert tickets for the Toronto show on June 28, 2025. The prize has no cash value and cannot be exchanged or transferred.</li>
-        <li><strong>Use of Personal Information:</strong> Your submitted information (name, phone number, and email) will only be used for the purpose of this lucky draw and for notifying the winner. It will not be shared with third parties or used for any commercial purposes.</li>
-        <li><strong>Winner Notification:</strong> The winner will be selected at random and notified by email on June 18, 2025. If the winner does not respond within 48 hours, the prize will be forfeited and another winner will be selected.</li>
-        <li><strong>Organizer Rights:</strong> The organizer reserves the right to cancel or modify the draw at any time without prior notice, especially in the case of technical issues or fraudulent activity.</li>
-        <li><strong>Agreement:</strong> By checking the box below and submitting your information, you confirm that you have read, understood, and agreed to these terms.</li>
-      </ol>
+      <div class="disclaimer-box">
+        <p>By participating in this lucky draw, you agree to the following terms:</p>
+        <ol>
+          <li><strong>Purpose:</strong> This lucky draw is organized for promotional purposes in connection with the "Ekin Cheng – HERE & NOW 2025" Toronto concert.</li>
+          <li><strong>Eligibility:</strong> Participation is open to individuals residing in Canada who are 18 years or older. Only one entry per person is allowed.</li>
+          <li><strong>Prize:</strong> The winner will receive a limited edition concert poster with Ekin Cheng's signature. The prize has no cash value and cannot be exchanged or transferred.</li>
+          <li><strong>Use of Personal Information:</strong> Your submitted information (name, phone number, and email) will only be used for the purpose of this lucky draw and for notifying the winner. It will not be shared with third parties or used for any commercial purposes.</li>
+          <li><strong>Winner Notification:</strong> The winner will be selected at random and notified by email on June 18, 2025. If the winner does not respond within 48 hours, the prize will be forfeited and another winner will be selected.</li>
+          <li><strong>Organizer Rights:</strong> The organizer reserves the right to cancel or modify the draw at any time without prior notice, especially in the case of technical issues or fraudulent activity.</li>
+          <li><strong>Agreement:</strong> By checking the box below and submitting your information, you confirm that you have read, understood, and agreed to these terms.</li>
+        </ol>
+      </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="agreeCheck">
         <label class="form-check-label" for="agreeCheck">I have read and agree to the above terms</label>
@@ -89,7 +101,7 @@
       <ul>
         <li>📍 Venue: The Theatre at Great Canadian Toronto</li>
         <li>📆 Date: June 28, 2025 at 8:00 PM</li>
-        <li>🎟 Prize: 2 VIP Tickets (Total Value: $300)</li>
+        <li>🎟 Prize: Limited edition concert poster with Ekin Cheng's signature</li>
         <li>⏰ Entry Deadline: June 15, 2025</li>
       </ul>
       <hr />
