@@ -176,23 +176,26 @@
     }
 
     document.getElementById('drawForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const data = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        timestamp: new Date().toISOString()
-      };
+        e.preventDefault();
 
-      try {
-        await db.collection("registrations").add(data);
-        document.getElementById('formSection').classList.remove('visible');
-        document.getElementById('thankYou').classList.add('visible');
-      } catch (err) {
-        console.error("Error saving to Firestore:", err);
-        alert("Failed to submit. Please try again.");
-      }
+        const data = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            status: "New",
+            createdate: firebase.firestore.Timestamp.now(),
+            timestamp: new Date().toISOString() // optional: for readable log
+        };
+
+        try {
+            await db.collection("registrations").add(data);
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYou').classList.add('visible');
+        } catch (err) {
+            console.error("Error saving to Firestore:", err);
+            alert("Failed to submit. Please try again.");
+        }
     });
   </script>
 
