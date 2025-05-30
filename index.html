@@ -111,22 +111,25 @@
       <form id="drawForm">
         <div class="row">
             <div class="mb-3 col-md-6">
-            <label class="form-label">First Name</label>
-            <input type="text" class="form-control" id="firstName" required>
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" required>
             </div>
             <div class="mb-3 col-md-6">
-            <label class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastName" required>
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" required>
             </div>
         </div>
-        <div class="mb-3" style="max-width: 300px;">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-control" id="phone" required>
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3 col-md-8">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="email" required>
-        </div>
+
         <button type="submit" class="btn btn-warning">Submit</button>
       </form>
     </div>
