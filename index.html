@@ -112,13 +112,25 @@
       </ul>
       <hr />
 
-      <form action="https://formspree.io/f/xovwajqw" method="POST">
-        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
-        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
-        <input type="tel" name="phone" class="form-control" placeholder="Phone" required>
-        <input type="email" name="email" class="form-control" placeholder="Email" required>
+      <form id="drawForm">
+        <div class="mb-3">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" id="firstName" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
         <button type="submit" class="btn btn-warning">Submit</button>
-        </form>
+      </form>
     </div>
 
     <!-- Thank You Message -->
@@ -144,32 +156,48 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
+    <script>
     function showForm() {
-      if (document.getElementById('agreeCheck').checked) {
+        if (document.getElementById('agreeCheck').checked) {
         document.getElementById('disclaimer').classList.remove('visible');
         document.getElementById('formSection').classList.add('visible');
-      } else {
+        } else {
         alert('Please agree to the terms before continuing.');
-      }
+        }
     }
 
-    document.getElementById('drawForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    document.getElementById('drawForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-      const data = {
+        const data = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
         phone: document.getElementById('phone').value,
         email: document.getElementById('email').value,
         timestamp: new Date().toISOString()
-      };
+        };
 
-      console.log('Collected:', data);
+        try {
+        const response = await fetch('/.netlify/functions/send-email', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-      document.getElementById('formSection').classList.remove('visible');
-      document.getElementById('thankYou').classList.add('visible');
+        if (response.ok) {
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYou').classList.add('visible');
+        } else {
+            alert('Something went wrong. Please try again.');
+        }
+        } catch (error) {
+        console.error('Error:', error);
+        alert('Submission failed. Please try again later.');
+        }
     });
-  </script>
+    </script>
+
 </body>
 </html>
