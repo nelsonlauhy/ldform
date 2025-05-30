@@ -74,6 +74,7 @@
     <div class="overlay animate__animated animate__fadeInUp">
       <h1 class="display-5">Ekin Cheng HERE & NOW 2025</h1>
       <p class="lead">Toronto Concert Lucky Draw Registration</p>
+      <button class="btn btn-outline-light btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#posterModal">View Official Poster</button>
     </div>
   </div>
 
@@ -138,6 +139,22 @@
     </div>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="posterModal" tabindex="-1" aria-labelledby="posterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white" id="posterModalLabel">Official Concert Poster</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img src="images/poster2.png" alt="Ekin Cheng Poster" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function showForm() {
       if (document.getElementById('agreeCheck').checked) {
