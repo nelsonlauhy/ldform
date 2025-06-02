@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ekin Cheng Concert Lucky Draw</title>
+  <title>鄭伊健演唱會抽獎活動</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
@@ -62,61 +61,59 @@
 <body>
   <div class="hero">
     <div class="overlay animate__animated animate__fadeInUp">
-      <h1 class="display-5">Ekin Cheng HERE & NOW 2025</h1>
-      <p class="lead">Toronto Concert Lucky Draw Registration</p>
-      <button class="btn btn-outline-light btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#posterModal">View Official Poster</button>
+      <h1 class="display-5">鄭伊健 HERE & NOW 2025</h1>
+      <p class="lead">多倫多演唱會抽獎報名</p>
+      <button class="btn btn-outline-light btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#posterModal">查看官方海報</button>
     </div>
   </div>
 
   <div class="container mt-4">
-    <!-- Draw Info + Form -->
     <div id="formSection" class="form-section animate__animated animate__fadeIn">
-      <h4>Lucky Draw Details</h4>
+      <h4>抽獎活動詳情</h4>
       <ul>
-        <li>Venue: The Theatre at Great Canadian Toronto</li>
-        <li>Date: June 28, 2025 at 8:00 PM</li>
-        <li>Prize: Signed concert poster by Ekin Cheng</li>
-        <li>Entry Deadline: June 15, 2025</li>
+        <li>地點：The Theatre at Great Canadian Toronto</li>
+        <li>日期：2025年6月28日 晚上8:00</li>
+        <li>獎品：鄭伊健親筆簽名演唱會海報</li>
+        <li>截止日期：2025年6月15日</li>
       </ul>
       <hr />
 
       <form id="drawForm">
         <div class="row">
-            <div class="mb-3 col-md-6">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstName" required>
-            </div>
-            <div class="mb-3 col-md-6">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" required>
-            </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">名字</label>
+            <input type="text" class="form-control" id="firstName" required>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">姓氏</label>
+            <input type="text" class="form-control" id="lastName" required>
+          </div>
         </div>
         <div class="row">
-            <div class="mb-3 col-md-4">
-                <label class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" required>
-            </div>
-            <div class="mb-3 col-md-8">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
+          <div class="mb-3 col-md-4">
+            <label class="form-label">電話號碼</label>
+            <input type="tel" class="form-control" id="phone" required>
+          </div>
+          <div class="mb-3 col-md-8">
+            <label class="form-label">電郵地址</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
         </div>
 
         <div class="form-check mt-3">
           <input class="form-check-input" type="checkbox" id="agreeCheck">
           <label class="form-check-label" for="agreeCheck">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">I have read and agree to the above terms</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">我已閱讀並同意以上條款</a>
           </label>
         </div>
 
-        <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>Submit</button>
+        <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>提交</button>
       </form>
     </div>
 
-    <!-- Thank You Message -->
     <div id="thankYou" class="form-section text-center animate__animated animate__fadeIn" style="display: none;">
-      <h4>Thank You for Registering!</h4>
-      <p>Your entry has been received. Good luck!</p>
+      <h4>感謝您的參與！</h4>
+      <p>您的報名已成功接收，祝您好運！</p>
     </div>
   </div>
 
@@ -125,11 +122,11 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content bg-dark">
         <div class="modal-header border-0">
-          <h5 class="modal-title text-white" id="posterModalLabel">Official Concert Poster</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title text-white" id="posterModalLabel">官方演唱會海報</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="關閉"></button>
         </div>
         <div class="modal-body text-center">
-          <img src="images/poster2.png" alt="Ekin Cheng Poster" class="img-fluid rounded shadow">
+          <img src="images/poster2.png" alt="鄭伊健海報" class="img-fluid rounded shadow">
         </div>
       </div>
     </div>
@@ -140,19 +137,19 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content bg-light text-dark">
         <div class="modal-header">
-          <h5 class="modal-title" id="disclaimerModalLabel">Lucky Draw Disclaimer</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="disclaimerModalLabel">抽獎活動條款</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
         </div>
         <div class="modal-body">
           <div class="disclaimer-box">
-            <p>By participating in this lucky draw, you agree to the following terms:</p>
+            <p>參與本抽獎活動即表示您同意以下條款：</p>
             <ol>
-              <li><strong>Purpose:</strong> Promotional for the "Ekin Cheng – HERE & NOW 2025" Toronto concert.</li>
-              <li><strong>Eligibility:</strong> Residents of Canada age 18+; one entry per person.</li>
-              <li><strong>Prize:</strong> Limited edition concert poster with Ekin Cheng's signature.</li>
-              <li><strong>Use of Info:</strong> Used only for the draw; not shared or sold.</li>
-              <li><strong>Winner:</strong> Contacted via email on June 18, 2025.</li>
-              <li><strong>Rights:</strong> Organizer may cancel/modify without notice.</li>
+              <li><strong>目的：</strong>推廣「鄭伊健 – HERE & NOW 2025」多倫多演唱會。</li>
+              <li><strong>參加資格：</strong>限居住於加拿大、年滿18歲人士，每人限報名一次。</li>
+              <li><strong>獎品：</strong>鄭伊健親筆簽名之限量演唱會海報。</li>
+              <li><strong>個人資料用途：</strong>僅用於本次抽獎活動，不會外洩或販售。</li>
+              <li><strong>中獎通知：</strong>將於2025年6月18日以電郵方式通知中獎者。</li>
+              <li><strong>主辦權利：</strong>主辦方有權隨時取消或修改活動內容，無須另行通知。</li>
             </ol>
           </div>
         </div>
@@ -160,9 +157,8 @@
     </div>
   </div>
 
-  <!-- Firebase + Form Script -->
+  <!-- Firebase Script -->
   <script>
-    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
       authDomain: "ldform.firebaseapp.com",
@@ -175,36 +171,35 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Enable submit button only when checkbox is checked
     document.getElementById('agreeCheck').addEventListener('change', function () {
       document.getElementById('submitBtn').disabled = !this.checked;
     });
 
-    // Submit handler
     document.getElementById('drawForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
+      e.preventDefault();
 
-        const data = {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            phone: document.getElementById('phone').value,
-            email: document.getElementById('email').value,
-            status: "New",
-            createdate: firebase.firestore.Timestamp.now(),
-            timestamp: new Date().toISOString()
-        };
+      const data = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        status: "New",
+        createdate: firebase.firestore.Timestamp.now(),
+        timestamp: new Date().toISOString()
+      };
 
-        try {
-            await db.collection("registrations").add(data);
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('thankYou').style.display = 'block';
-        } catch (err) {
-            console.error("Error saving to Firestore:", err);
-            alert("Failed to submit. Please try again.");
-        }
+      try {
+        await db.collection("registrations").add(data);
+        document.getElementById('formSection').style.display = 'none';
+        document.getElementById('thankYou').style.display = 'block';
+      } catch (err) {
+        console.error("儲存失敗：", err);
+        alert("提交失敗，請稍後再試。");
+      }
     });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
