@@ -25,6 +25,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      animation: fadeIn 2s ease-out;
     }
     @media (min-width: 768px) {
       .hero {
@@ -35,10 +36,15 @@
       background-color: rgba(0, 0, 0, 0.6);
       padding: 40px;
       border-radius: 10px;
+      animation: fadeInUp 1s ease-out;
     }
-    .form-section {
+    .form-section, .thank-you {
+      display: none;
       padding: 20px;
       animation: fadeIn 1s ease-in;
+    }
+    .visible {
+      display: block;
     }
     .btn-warning {
       font-weight: bold;
@@ -55,7 +61,8 @@
       border-radius: 8px;
       max-height: 160px;
       overflow-y: scroll;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -69,6 +76,27 @@
   </div>
 
   <div class="container mt-4">
+    <!-- Disclaimer Section -->
+    <div id="disclaimer" class="form-section visible animate__animated animate__fadeIn">
+      <h4>Lucky Draw Disclaimer</h4>
+      <div class="disclaimer-box">
+        <p>By participating in this lucky draw, you agree to the following terms:</p>
+        <ol>
+          <li><strong>Purpose:</strong> Promotional for the "Ekin Cheng – HERE & NOW 2025" Toronto concert.</li>
+          <li><strong>Eligibility:</strong> Residents of Canada age 18+; one entry per person.</li>
+          <li><strong>Prize:</strong> Limited edition concert poster with Ekin Cheng's signature.</li>
+          <li><strong>Use of Info:</strong> Used only for the draw; not shared or sold.</li>
+          <li><strong>Winner:</strong> Contacted via email on June 18, 2025.</li>
+          <li><strong>Rights:</strong> Organizer may cancel/modify without notice.</li>
+        </ol>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="agreeCheck">
+        <label class="form-check-label" for="agreeCheck">I have read and agree to the above terms</label>
+      </div>
+      <button class="btn btn-light mt-3" onclick="showForm()">Next</button>
+    </div>
+
     <!-- Draw Info + Form -->
     <div id="formSection" class="form-section animate__animated animate__fadeIn">
       <h4>Lucky Draw Details</h4>
@@ -102,25 +130,18 @@
             </div>
         </div>
 
-        <div class="form-check mt-3">
-          <input class="form-check-input" type="checkbox" id="agreeCheck">
-          <label class="form-check-label" for="agreeCheck">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">I have read and agree to the above terms</a>
-          </label>
-        </div>
-
-        <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>Submit</button>
+        <button type="submit" class="btn btn-warning">Submit</button>
       </form>
     </div>
 
     <!-- Thank You Message -->
-    <div id="thankYou" class="form-section text-center animate__animated animate__fadeIn" style="display: none;">
+    <div id="thankYou" class="form-section text-center animate__animated animate__fadeIn">
       <h4>Thank You for Registering!</h4>
       <p>Your entry has been received. Good luck!</p>
     </div>
   </div>
 
-  <!-- Poster Modal -->
+  <!-- Modal -->
   <div class="modal fade" id="posterModal" tabindex="-1" aria-labelledby="posterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content bg-dark">
@@ -135,34 +156,9 @@
     </div>
   </div>
 
-  <!-- Disclaimer Modal -->
-  <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-light text-dark">
-        <div class="modal-header">
-          <h5 class="modal-title" id="disclaimerModalLabel">Lucky Draw Disclaimer</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="disclaimer-box">
-            <p>By participating in this lucky draw, you agree to the following terms:</p>
-            <ol>
-              <li><strong>Purpose:</strong> Promotional for the "Ekin Cheng – HERE & NOW 2025" Toronto concert.</li>
-              <li><strong>Eligibility:</strong> Residents of Canada age 18+; one entry per person.</li>
-              <li><strong>Prize:</strong> Limited edition concert poster with Ekin Cheng's signature.</li>
-              <li><strong>Use of Info:</strong> Used only for the draw; not shared or sold.</li>
-              <li><strong>Winner:</strong> Contacted via email on June 18, 2025.</li>
-              <li><strong>Rights:</strong> Organizer may cancel/modify without notice.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Firebase + Form Script -->
   <script>
-    // Firebase config
+    // Initialize Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
       authDomain: "ldform.firebaseapp.com",
@@ -175,12 +171,15 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Enable submit button only when checkbox is checked
-    document.getElementById('agreeCheck').addEventListener('change', function () {
-      document.getElementById('submitBtn').disabled = !this.checked;
-    });
+    function showForm() {
+      if (document.getElementById('agreeCheck').checked) {
+        document.getElementById('disclaimer').classList.remove('visible');
+        document.getElementById('formSection').classList.add('visible');
+      } else {
+        alert('Please agree to the terms before continuing.');
+      }
+    }
 
-    // Submit handler
     document.getElementById('drawForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -191,13 +190,13 @@
             email: document.getElementById('email').value,
             status: "New",
             createdate: firebase.firestore.Timestamp.now(),
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString() // optional: for readable log
         };
 
         try {
             await db.collection("registrations").add(data);
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('thankYou').style.display = 'block';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYou').classList.add('visible');
         } catch (err) {
             console.error("Error saving to Firestore:", err);
             alert("Failed to submit. Please try again.");
