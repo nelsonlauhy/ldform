@@ -37,6 +37,7 @@
             <th>Last Name</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Created Date</th>
           </tr>
         </thead>
         <tbody id="regBody"></tbody>
@@ -72,11 +73,13 @@
 
     function addRow(data) {
       const row = document.createElement('tr');
+      const createdate = data.createdate?.toDate?.().toLocaleString?.() || '';
       row.innerHTML = `
         <td>${data.firstName || ''}</td>
         <td>${data.lastName || ''}</td>
         <td>${data.phone || ''}</td>
         <td>${data.email || ''}</td>
+        <td>${createdate}</td>
       `;
       regBody.appendChild(row);
     }
@@ -93,10 +96,11 @@
 
     // Export to CSV
     function exportToCSV() {
-      let csv = "First Name,Last Name,Phone,Email\n";
-      allData.forEach(item => {
+      let csv = "First Name,Last Name,Phone,Email,Created Date\n";
 
-        csv += `"${item.firstName || ''}","${item.lastName || ''}","${item.phone || ''}","${item.email || ''}"\n`;
+      allData.forEach(item => {
+        const created = item.createdate?.toDate?.().toLocaleString?.() || '';
+        csv += `"${item.firstName || ''}","${item.lastName || ''}","${item.phone || ''}","${item.email || ''}","${created}"\n`;
 
       });
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
