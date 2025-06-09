@@ -21,29 +21,25 @@
       overflow-x: hidden;
     }
 
-    .poster-overlay {
+    .arrow-section {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 1;
       width: 100%;
-      height: 80vh; /* reduced height */
-      background-color: rgba(0, 0, 0, 0.6);
+      height: 80vh;
+      z-index: 2;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
+      align-items: flex-end;
     }
 
     .arrow-down {
-      position: absolute;
-      bottom: 120px; /* moved up */
       font-size: 2.5rem;
       color: white;
+      margin-bottom: 120px;
       animation: bounce 1.5s infinite;
       cursor: pointer;
+      z-index: 2;
     }
 
     @keyframes bounce {
@@ -53,17 +49,23 @@
 
     .form-container {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       background-color: rgba(30, 30, 30, 0.96);
       margin-top: 80vh;
       animation: slideUp 1s ease-out forwards;
       display: none;
       padding: 40px 20px;
+      color: white;
     }
 
     @keyframes slideUp {
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
+    }
+
+    .btn-warning:hover {
+      background: #ffc107;
+      transform: scale(1.05);
     }
 
     .disclaimer-box {
@@ -75,24 +77,17 @@
       overflow-y: scroll;
       font-size: 0.85rem;
     }
-
-    .btn-warning:hover {
-      background: #ffc107;
-      transform: scale(1.05);
-    }
   </style>
 </head>
 <body>
 
-  <!-- Poster Overlay Section -->
-  <div class="poster-overlay" id="posterOverlay">
-    <h1 class="display-6">鄭伊健 HERE & NOW 2025</h1>
-    <p>多倫多演唱會抽獎報名</p>
+  <!-- Arrow Only Section (no text overlay) -->
+  <div class="arrow-section">
     <div class="arrow-down" onclick="revealForm()">⬆</div>
   </div>
 
   <!-- Sliding Form Section -->
-  <div id="formContainer" class="form-container container text-white">
+  <div id="formContainer" class="form-container container">
     <div class="form-section">
       <p>
         <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button">
