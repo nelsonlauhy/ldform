@@ -16,9 +16,10 @@
       height: 100%;
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('images/ekinform.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: url('images/ekinform.jpg') no-repeat center top fixed;
+      background-size: 95% auto; /* adds padding space */
       overflow-x: hidden;
+      background-color: black; /* fallback color */
     }
 
     .arrow-section {
@@ -81,7 +82,7 @@
 </head>
 <body>
 
-  <!-- Arrow Only Section (no text overlay) -->
+  <!-- Arrow Only Section -->
   <div class="arrow-section">
     <div class="arrow-down" onclick="revealForm()">⬆</div>
   </div>
