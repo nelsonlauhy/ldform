@@ -6,8 +6,6 @@
   <title>鄭伊健演唱會抽獎活動</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
@@ -68,7 +66,7 @@
       border-right: 4px solid white;
       border-top: 4px solid white;
       transform: rotate(-45deg);
-      margin: 2px; /* reduced spacing */
+      margin: 2px;
       animation: bounceChevron 1.2s infinite;
     }
 
@@ -83,7 +81,7 @@
 
     .form-container {
       position: fixed;
-      top: calc(100vh - 100px); /* show top 100px of form */
+      top: calc(100vh - 100px); /* Reveal top 100px */
       left: 0;
       width: 100%;
       z-index: 3;
@@ -94,23 +92,7 @@
       height: calc(100vh - 60px);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
-      transition: top 0.8s ease-out, opacity 0.8s ease-out;
-    }
-
-    .form-slide-top {
-      display: block;
-      animation: slideUpToOffset 0.8s forwards ease-out;
-    }
-
-    @keyframes slideUpToOffset {
-      from {
-        top: 100vh;
-        opacity: 0;
-      }
-      to {
-        top: 60px;
-        opacity: 1;
-      }
+      transition: top 0.8s ease-out;
     }
 
     .btn-warning:hover {
@@ -131,7 +113,7 @@
 </head>
 <body>
 
-  <!-- Animated Chevron Arrow Section -->
+  <!-- Arrow -->
   <div class="arrow-section">
     <div class="arrow-down" onclick="revealForm()">
       <div class="chevron"></div>
@@ -139,7 +121,7 @@
     </div>
   </div>
 
-  <!-- Sliding Form Section -->
+  <!-- Form -->
   <div id="formContainer" class="form-container container">
     <div class="form-section">
       <p>
@@ -158,7 +140,6 @@
           </ul>
         </div>
       </div>
-
       <hr />
       <form id="drawForm">
         <div class="row">
@@ -181,14 +162,12 @@
             <input type="email" class="form-control" id="email" required>
           </div>
         </div>
-
         <div class="form-check mt-3">
           <input class="form-check-input" type="checkbox" id="agreeCheck">
           <label class="form-check-label" for="agreeCheck">
             <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">我已閱讀並同意以上條款</a>
           </label>
         </div>
-
         <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>提交</button>
       </form>
 
@@ -199,7 +178,7 @@
     </div>
   </div>
 
-  <!-- Disclaimer Modal -->
+  <!-- Disclaimer -->
   <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content bg-light text-dark">
@@ -224,7 +203,7 @@
     </div>
   </div>
 
-  <!-- Firebase + Form Script -->
+  <!-- Firebase & Slide Logic -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
@@ -267,10 +246,8 @@
 
     function revealForm() {
       document.querySelector('.arrow-section').style.display = 'none';
-      const formContainer = document.getElementById('formContainer');
-      formContainer.style.top = '60px';
+      document.getElementById('formContainer').style.top = '60px';
     }
-
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
