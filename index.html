@@ -31,28 +31,14 @@
       background-size: 95% auto;
       z-index: 0;
       opacity: 0;
-      filter: brightness(2); /* start bright */
+      filter: brightness(2);
       animation: fadeInBright 2.5s ease-out forwards;
     }
 
     @keyframes fadeInBright {
-      0% {
-        opacity: 0;
-        filter: brightness(2);
-      }
-      50% {
-        opacity: 1;
-        filter: brightness(1.5);
-      }
-      100% {
-        opacity: 1;
-        filter: brightness(1);
-      }
-    }
-
-    @keyframes fadeInBg {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      0%   { opacity: 0; filter: brightness(2); }
+      50%  { opacity: 1; filter: brightness(1.5); }
+      100% { opacity: 1; filter: brightness(1); }
     }
 
     .arrow-section {
@@ -92,7 +78,7 @@
       color: white;
       display: none;
       overflow-y: auto;
-      max-height: calc(100vh - 60px);
+      height: calc(100vh - 60px);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
     }
@@ -108,7 +94,7 @@
         opacity: 0;
       }
       to {
-        top: 100px;
+        top: 60px;
         opacity: 1;
       }
     }
