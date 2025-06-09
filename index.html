@@ -67,17 +67,19 @@
       border-top: 4px solid white;
       transform: rotate(-45deg) scaleY(0.6);
       margin: 1px;
-      animation: bounceChevron 1.2s infinite;
+      animation: pulseSlideUp 1.2s infinite;
     }
 
     .chevron:nth-child(2) {
       animation-delay: 0.2s;
     }
 
-    @keyframes bounceChevron {
-      0%, 100% { transform: rotate(-45deg) translateY(0); }
-      50%      { transform: rotate(-45deg) translateY(-6px); }
+    @keyframes pulseSlideUp {
+      0%   { transform: rotate(-45deg) translateY(0); opacity: 1; }
+      50%  { transform: rotate(-45deg) translateY(-6px); opacity: 0.6; }
+      100% { transform: rotate(-45deg) translateY(0); opacity: 1; }
     }
+
 
     .form-container {
       position: fixed;
