@@ -12,86 +12,87 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
   <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: url('images/ekinform.jpg') no-repeat center center fixed;
-    background-size: cover;
-    overflow-x: hidden;
-  }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('images/ekinform.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
 
-  .poster-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-  }
+    .poster-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 80vh; /* reduced height */
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
 
-  .arrow-down {
-    position: absolute;
-    bottom: 40px;
-    font-size: 2.5rem;
-    color: white;
-    animation: bounce 1.5s infinite;
-    cursor: pointer;
-  }
+    .arrow-down {
+      position: absolute;
+      bottom: 120px; /* moved up */
+      font-size: 2.5rem;
+      color: white;
+      animation: bounce 1.5s infinite;
+      cursor: pointer;
+    }
 
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-  .form-container {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(30, 30, 30, 0.96);
-    margin-top: 100vh;
-    animation: slideUp 1s ease-out forwards;
-    display: none;
-  }
+    .form-container {
+      position: relative;
+      z-index: 2;
+      background-color: rgba(30, 30, 30, 0.96);
+      margin-top: 80vh;
+      animation: slideUp 1s ease-out forwards;
+      display: none;
+      padding: 40px 20px;
+    }
 
-  @keyframes slideUp {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-  .disclaimer-box {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 15px;
-    border-radius: 8px;
-    max-height: 360px;
-    overflow-y: scroll;
-    font-size: 0.85rem;
-  }
+    .disclaimer-box {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 15px;
+      border-radius: 8px;
+      max-height: 360px;
+      overflow-y: scroll;
+      font-size: 0.85rem;
+    }
 
-  .btn-warning:hover {
-    background: #ffc107;
-    transform: scale(1.05);
-  }
-</style>
-
+    .btn-warning:hover {
+      background: #ffc107;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <!-- Fixed Poster Overlay Section -->
+
+  <!-- Poster Overlay Section -->
   <div class="poster-overlay" id="posterOverlay">
     <h1 class="display-6">鄭伊健 HERE & NOW 2025</h1>
     <p>多倫多演唱會抽獎報名</p>
     <div class="arrow-down" onclick="revealForm()">⬆</div>
   </div>
 
-  <!-- Sliding Form Container -->
-  <div id="formContainer" class="form-container container py-5 text-white">
+  <!-- Sliding Form Section -->
+  <div id="formContainer" class="form-container container text-white">
     <div class="form-section">
       <p>
         <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button">
@@ -150,8 +151,32 @@
     </div>
   </div>
 
+  <!-- Disclaimer Modal -->
+  <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-light text-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="disclaimerModalLabel">抽獎活動條款</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+        </div>
+        <div class="modal-body">
+          <div class="disclaimer-box">
+            <p>參與本抽獎活動即表示您同意以下條款：</p>
+            <ol>
+              <li><strong>目的：</strong>推廣「鄭伊健 – HERE & NOW 2025」多倫多演唱會。</li>
+              <li><strong>參加資格：</strong>限居住於加拿大、年滿18歲人士，每人限報名一次。</li>
+              <li><strong>獎品：</strong>鄭伊健親筆簽名之限量演唱會海報。</li>
+              <li><strong>個人資料用途：</strong>僅用於本次抽獎活動，不會外洩或販售。</li>
+              <li><strong>中獎通知：</strong>將於2025年6月18日以電郵方式通知中獎者。</li>
+              <li><strong>主辦權利：</strong>主辦方有權隨時取消或修改活動內容，無須另行通知。</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Firebase + Animation Script -->
+  <!-- Firebase + Form Script -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
@@ -193,8 +218,7 @@
     });
 
     function revealForm() {
-      const formContainer = document.getElementById('formContainer');
-      formContainer.style.display = 'block';
+      document.getElementById('formContainer').style.display = 'block';
     }
   </script>
 
