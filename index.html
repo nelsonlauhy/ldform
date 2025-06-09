@@ -215,6 +215,8 @@
 
     function revealForm() {
       document.getElementById('formContainer').style.display = 'block';
+      document.querySelector('.arrow-section').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 
