@@ -20,7 +20,7 @@
     .hero {
       text-align: center;
       padding: 80px 20px 40px;
-      background-image: url('images/ekinform2.png');
+      background-image: url('images/ekinform2.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -69,14 +69,22 @@
 
   <div class="container mt-4">
     <div id="formSection" class="form-section animate__animated animate__fadeIn">
-      <h4>抽獎活動詳情</h4>
-      <ul>
-        <li>地點：The Theatre at Great Canadian Toronto</li>
-        <li>日期：2025年6月28日 晚上8:00</li>
-        <li>獎品：鄭伊健親筆簽名演唱會海報</li>
-        <li>截止日期：2025年6月15日</li>
-      </ul>
-      <hr />
+      <p>
+        <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button" aria-expanded="false" aria-controls="eventDetails">
+          👉 查看抽獎活動詳情
+        </a>
+      </p>
+      <div class="collapse" id="eventDetails">
+        <div class="card card-body bg-dark text-white border-light">
+          <h5 class="mb-3">抽獎活動詳情</h5>
+          <ul>
+            <li>地點：The Theatre at Great Canadian Toronto</li>
+            <li>日期：2025年6月28日 晚上8:00</li>
+            <li>獎品：鄭伊健親筆簽名演唱會海報</li>
+            <li>截止日期：2025年6月15日</li>
+          </ul>
+        </div>
+      </div>
 
       <form id="drawForm">
         <div class="row">
