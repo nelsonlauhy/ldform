@@ -39,25 +39,30 @@
       100% { opacity: 1; filter: brightness(1); }
     }
 
-    .arrow-section {
+    .form-container {
       position: fixed;
-      top: 0;
+      top: calc(100vh - 240px);
       left: 0;
       width: 100%;
-      height: 80vh;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
+      z-index: 3;
+      background-color: rgba(30, 30, 30, 0.96);
+      padding: 40px 20px 20px;
+      color: white;
+      overflow-y: auto;
+      height: calc(100vh - 80px);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      transition: top 0.8s ease-out;
     }
 
-    .arrow-down {
+    .arrow-toggle {
       cursor: pointer;
-      margin-bottom: 70px;
+      width: 40px;
+      height: 20px;
+      margin: 0 auto 10px;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      z-index: 2;
     }
 
     .chevron {
@@ -66,34 +71,11 @@
       border-right: 4px solid white;
       border-top: 4px solid white;
       transform: rotate(-45deg) scaleY(0.6);
-      margin: 1px;
-      animation: pulseSlideUp 1.2s infinite;
+      transition: transform 0.4s ease;
     }
 
-    .chevron:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    @keyframes pulseSlideUp {
-      0%   { transform: rotate(-45deg) translateY(0); opacity: 1; }
-      50%  { transform: rotate(-45deg) translateY(-6px); opacity: 0.6; }
-      100% { transform: rotate(-45deg) translateY(0); opacity: 1; }
-    }
-
-    .form-container {
-      position: fixed;
-      top: calc(100vh - 240px); 
-      left: 0;
-      width: 100%;
-      z-index: 3;
-      background-color: rgba(30, 30, 30, 0.96);
-      padding: 40px 20px;
-      color: white;
-      overflow-y: auto;
-      height: calc(100vh - 80px);
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      transition: top 0.8s ease-out;
+    .chevron.down {
+      transform: rotate(135deg) scaleY(0.6);
     }
 
     .btn-warning:hover {
@@ -114,18 +96,15 @@
 </head>
 <body>
 
-  <!-- Arrow -->
-  <div class="arrow-section">
-    <div class="arrow-down" onclick="revealForm()">
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-    </div>
-  </div>
-
   <!-- Form -->
   <div id="formContainer" class="form-container container">
+    <!-- Toggle Arrow -->
+    <div class="arrow-toggle" onclick="toggleForm()">
+      <div id="chevronIcon" class="chevron"></div>
+    </div>
+
     <div class="form-section">
-      <div class="text-center text-white" style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 4px;">
+      <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
         請按箭頭開啟表格填寫
       </div>
       <p>
@@ -182,7 +161,7 @@
     </div>
   </div>
 
-  <!-- Disclaimer -->
+  <!-- Disclaimer Modal -->
   <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content bg-light text-dark">
@@ -207,7 +186,7 @@
     </div>
   </div>
 
-  <!-- Firebase & Slide Logic -->
+  <!-- Firebase & Toggle Logic -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
@@ -248,9 +227,18 @@
       }
     });
 
-    function revealForm() {
-      document.querySelector('.arrow-section').style.display = 'none';
-      document.getElementById('formContainer').style.top = '120px';
+    let formUp = false;
+    function toggleForm() {
+      const form = document.getElementById('formContainer');
+      const arrow = document.getElementById('chevronIcon');
+      if (!formUp) {
+        form.style.top = "60px";
+        arrow.classList.add("down");
+      } else {
+        form.style.top = "calc(100vh - 240px)";
+        arrow.classList.remove("down");
+      }
+      formUp = !formUp;
     }
   </script>
 
