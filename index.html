@@ -16,10 +16,27 @@
       height: 100%;
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('images/ekinform.jpg') no-repeat center top fixed;
-      background-size: 95% auto;
       overflow: hidden;
       background-color: black;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/ekinform.jpg') no-repeat center top fixed;
+      background-size: 95% auto;
+      z-index: 0;
+      opacity: 0;
+      animation: fadeInBg 2s ease-out forwards;
+    }
+
+    @keyframes fadeInBg {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .arrow-section {
@@ -50,7 +67,7 @@
 
     .form-container {
       position: fixed;
-      top: 100vh; /* start off-screen */
+      top: 100vh;
       left: 0;
       width: 100%;
       z-index: 3;
@@ -59,21 +76,23 @@
       color: white;
       display: none;
       overflow-y: auto;
-      max-height: 100vh;
+      max-height: calc(100vh - 60px);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
     }
 
     .form-slide-top {
       display: block;
-      animation: slideUpToTop 0.8s forwards ease-out;
+      animation: slideUpToOffset 0.8s forwards ease-out;
     }
 
-    @keyframes slideUpToTop {
+    @keyframes slideUpToOffset {
       from {
         top: 100vh;
         opacity: 0;
       }
       to {
-        top: 0;
+        top: 60px;
         opacity: 1;
       }
     }
