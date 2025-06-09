@@ -101,7 +101,7 @@
         按此填寫參加表格
       </div>
 
-      <!-- Accordion will be loaded here -->
+      <!-- Accordion placeholder -->
       <div id="accordionContainer"></div>
 
       <form id="drawForm">
@@ -155,6 +155,15 @@
         document.getElementById('accordionContainer').innerHTML = html;
       });
 
+    // Load Modal HTML
+    fetch('disclaimerModal.html')
+      .then(res => res.text())
+      .then(html => {
+        const modalDiv = document.createElement('div');
+        modalDiv.innerHTML = html;
+        document.body.appendChild(modalDiv);
+      });
+
     document.getElementById('agreeCheck').addEventListener('change', function () {
       document.getElementById('submitBtn').disabled = !this.checked;
     });
@@ -183,18 +192,18 @@
     function toggleForm() {
       const form = document.getElementById('formContainer');
       const arrow = document.getElementById('chevronIcon');
+      const hint = document.querySelector('.text-center.text-white');
       if (!formUp) {
         form.style.top = "60px";
         arrow.classList.remove("rotate-down");
-        document.querySelector('.text-center.text-white').textContent = "按此縮小表格";
+        hint.textContent = "按此縮小表格";
       } else {
         form.style.top = "calc(100vh - 240px)";
         arrow.classList.add("rotate-down");
-        document.querySelector('.text-center.text-white').textContent = "按此填寫參加表格";
+        hint.textContent = "按此填寫參加表格";
       }
       formUp = !formUp;
     }
   </script>
 </body>
 </html>
-
