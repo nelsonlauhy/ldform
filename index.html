@@ -83,18 +83,18 @@
 
     .form-container {
       position: fixed;
-      top: 100vh;
+      top: calc(100vh - 100px); /* show top 100px of form */
       left: 0;
       width: 100%;
       z-index: 3;
       background-color: rgba(30, 30, 30, 0.96);
       padding: 40px 20px;
       color: white;
-      display: none;
       overflow-y: auto;
       height: calc(100vh - 60px);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
+      transition: top 0.8s ease-out, opacity 0.8s ease-out;
     }
 
     .form-slide-top {
@@ -267,8 +267,10 @@
 
     function revealForm() {
       document.querySelector('.arrow-section').style.display = 'none';
-      document.getElementById('formContainer').classList.add('form-slide-top');
+      const formContainer = document.getElementById('formContainer');
+      formContainer.style.top = '60px';
     }
+
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
