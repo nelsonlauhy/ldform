@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>鄭伊健演唱會抽獎活動</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     html, body {
       height: 100%;
@@ -86,14 +85,14 @@
       transform: scale(1.05);
     }
 
-    .disclaimer-box {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 15px;
-      border-radius: 8px;
-      max-height: 240px;
-      overflow-y: scroll;
-      font-size: 0.85rem;
+    .accordion-button {
+      background-color: #333;
+      color: white;
+    }
+
+    .accordion-body {
+      background-color: #444;
+      color: white;
     }
   </style>
 </head>
@@ -101,7 +100,7 @@
 
   <!-- Form Container -->
   <div id="formContainer" class="form-container container">
-    <!-- Toggle Arrow Inside Form -->
+    <!-- Toggle Arrow -->
     <div class="arrow-toggle" onclick="toggleForm()">
       <svg id="chevronIcon" class="chevron-svg rotate-down" viewBox="0 0 24 24">
         <path d="M12 15.5L6 9.5L7.4 8.1L12 12.7L16.6 8.1L18 9.5L12 15.5ZM12 22.5L6 16.5L7.4 15.1L12 19.7L16.6 15.1L18 16.5L12 22.5Z"/>
@@ -111,6 +110,27 @@
     <div class="form-section">
       <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
         請按箭頭開啟表格填寫
+      </div>
+
+      <!-- Accordion for 活動詳情 -->
+      <div class="accordion mb-3" id="accordionDetails">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+              👉 查看抽獎活動詳情
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionDetails">
+            <div class="accordion-body">
+              <ul>
+                <li>地點：The Theatre at Great Canadian Toronto</li>
+                <li>日期：2025年6月28日 晚上8:00</li>
+                <li>獎品：鄭伊健親筆簽名演唱會海報</li>
+                <li>截止日期：2025年6月15日</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       <form id="drawForm">
@@ -137,7 +157,7 @@
         <div class="form-check mt-3">
           <input class="form-check-input" type="checkbox" id="agreeCheck">
           <label class="form-check-label" for="agreeCheck">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">我已閱讀並同意以上條款</a>
+            我已閱讀並同意以上條款
           </label>
         </div>
         <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>提交</button>
@@ -150,31 +170,10 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="disclaimerModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-light text-dark">
-        <div class="modal-header">
-          <h5 class="modal-title">抽獎活動條款</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
-        </div>
-        <div class="modal-body">
-          <div class="disclaimer-box">
-            <ol>
-              <li><strong>目的：</strong>推廣演唱會</li>
-              <li><strong>資格：</strong>年滿18歲，加拿大居民</li>
-              <li><strong>獎品：</strong>簽名海報</li>
-              <li><strong>資料用途：</strong>僅限活動聯絡</li>
-              <li><strong>通知方式：</strong>將以電郵通知中獎者</li>
-              <li><strong>主辦權利：</strong>有權修改活動</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
@@ -225,7 +224,5 @@
       formUp = !formUp;
     }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
