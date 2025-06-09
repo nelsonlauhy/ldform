@@ -31,7 +31,23 @@
       background-size: 95% auto;
       z-index: 0;
       opacity: 0;
-      animation: fadeInBg 2s ease-out forwards;
+      filter: brightness(2); /* start bright */
+      animation: fadeInBright 2.5s ease-out forwards;
+    }
+
+    @keyframes fadeInBright {
+      0% {
+        opacity: 0;
+        filter: brightness(2);
+      }
+      50% {
+        opacity: 1;
+        filter: brightness(1.5);
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(1);
+      }
     }
 
     @keyframes fadeInBg {
