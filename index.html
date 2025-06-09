@@ -17,9 +17,9 @@
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: url('images/ekinform.jpg') no-repeat center top fixed;
-      background-size: 95% auto; /* adds padding space */
-      overflow-x: hidden;
-      background-color: black; /* fallback color */
+      background-size: 95% auto;
+      overflow: hidden;
+      background-color: black;
     }
 
     .arrow-section {
@@ -49,19 +49,33 @@
     }
 
     .form-container {
-      position: relative;
+      position: fixed;
+      top: 100vh; /* start off-screen */
+      left: 0;
+      width: 100%;
       z-index: 3;
       background-color: rgba(30, 30, 30, 0.96);
-      margin-top: 80vh;
-      animation: slideUp 1s ease-out forwards;
-      display: none;
       padding: 40px 20px;
       color: white;
+      display: none;
+      overflow-y: auto;
+      max-height: 100vh;
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .form-slide-top {
+      display: block;
+      animation: slideUpToTop 0.8s forwards ease-out;
+    }
+
+    @keyframes slideUpToTop {
+      from {
+        top: 100vh;
+        opacity: 0;
+      }
+      to {
+        top: 0;
+        opacity: 1;
+      }
     }
 
     .btn-warning:hover {
@@ -214,9 +228,9 @@
     });
 
     function revealForm() {
-      document.getElementById('formContainer').style.display = 'block';
       document.querySelector('.arrow-section').style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const formContainer = document.getElementById('formContainer');
+      formContainer.classList.add('form-slide-top');
     }
   </script>
 
