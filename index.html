@@ -13,7 +13,6 @@
       background-color: black;
       font-family: 'Segoe UI', sans-serif;
     }
-
     body::before {
       content: "";
       position: fixed;
@@ -27,13 +26,11 @@
       filter: brightness(2);
       animation: fadeInBright 2.5s ease-out forwards;
     }
-
     @keyframes fadeInBright {
       0%   { opacity: 0; filter: brightness(2); }
       50%  { opacity: 1; filter: brightness(1.5); }
       100% { opacity: 1; filter: brightness(1); }
     }
-
     .form-container {
       position: fixed;
       top: calc(100vh - 240px);
@@ -49,7 +46,6 @@
       border-top-right-radius: 12px;
       transition: top 0.8s ease-out;
     }
-
     .arrow-toggle {
       cursor: pointer;
       margin: -20px auto 5px;
@@ -63,33 +59,27 @@
       border: none;
       animation: pulseGlow 1.6s infinite;
     }
-
     @keyframes pulseGlow {
       0%, 100% { filter: drop-shadow(0 0 0 white); }
       50% { filter: drop-shadow(0 0 6px white); }
     }
-
     .chevron-svg {
       width: 100%;
       height: 100%;
       fill: white;
       transition: transform 0.4s ease;
     }
-
     .rotate-down {
       transform: rotate(180deg);
     }
-
     .btn-warning:hover {
       background: #ffc107;
       transform: scale(1.05);
     }
-
     .accordion-button {
       background-color: #333;
       color: white;
     }
-
     .accordion-body {
       background-color: #444;
       color: white;
@@ -98,7 +88,6 @@
 </head>
 <body>
 
-  <!-- Form Container -->
   <div id="formContainer" class="form-container container">
     <!-- Toggle Arrow -->
     <div class="arrow-toggle" onclick="toggleForm()">
@@ -109,29 +98,11 @@
 
     <div class="form-section">
       <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
-        請按箭頭開啟表格填寫
+        按此填寫參加表格
       </div>
 
-      <!-- Accordion for 活動詳情 -->
-      <div class="accordion mb-3" id="accordionDetails">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-              👉 查看抽獎活動詳情
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionDetails">
-            <div class="accordion-body">
-              <ul>
-                <li>地點：The Theatre at Great Canadian Toronto</li>
-                <li>日期：2025年6月28日 晚上8:00</li>
-                <li>獎品：鄭伊健親筆簽名演唱會海報</li>
-                <li>截止日期：2025年6月15日</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Accordion will be loaded here -->
+      <div id="accordionContainer"></div>
 
       <form id="drawForm">
         <div class="row">
@@ -170,21 +141,19 @@
     </div>
   </div>
 
-  <!-- Script -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
-      authDomain: "ldform.firebaseapp.com",
-      projectId: "ldform",
-      storageBucket: "ldform.firebasestorage.app",
-      messagingSenderId: "342526487179",
-      appId: "1:342526487179:web:bddee95d3bada6deac428e"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    // Load Accordion HTML
+    fetch('accordionDetails.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('accordionContainer').innerHTML = html;
+      });
 
     document.getElementById('agreeCheck').addEventListener('change', function () {
       document.getElementById('submitBtn').disabled = !this.checked;
@@ -217,12 +186,15 @@
       if (!formUp) {
         form.style.top = "60px";
         arrow.classList.remove("rotate-down");
+        document.querySelector('.text-center.text-white').textContent = "按此縮小表格";
       } else {
         form.style.top = "calc(100vh - 240px)";
         arrow.classList.add("rotate-down");
+        document.querySelector('.text-center.text-white').textContent = "按此填寫參加表格";
       }
       formUp = !formUp;
     }
   </script>
 </body>
 </html>
+
