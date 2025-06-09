@@ -109,6 +109,11 @@
       overflow-y: scroll;
       font-size: 0.85rem;
     }
+
+    .chevron-wrapper {
+      padding: 1px;
+      overflow: visible;
+    }
   </style>
 </head>
 <body>
@@ -118,8 +123,8 @@
     <!-- Toggle Arrow -->
     <div class="arrow-toggle" onclick="toggleForm()">
       <div id="chevronGroup" class="chevron-group">
-        <div class="chevron"></div>
-        <div class="chevron"></div>
+        <div class="chevron-wrapper"><div class="chevron"></div></div>
+        <div class="chevron-wrapper"><div class="chevron"></div></div>
       </div>
     </div>
 
