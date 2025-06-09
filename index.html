@@ -46,9 +46,9 @@
       width: 100%;
       z-index: 3;
       background-color: rgba(30, 30, 30, 0.96);
-      padding: 40px 20px 20px;
+      padding: 10px 20px 20px;
       color: white;
-      overflow-y: auto;
+      overflow-y: visible;
       height: calc(100vh - 80px);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
@@ -57,24 +57,11 @@
 
     .arrow-toggle {
       cursor: pointer;
-      width: 40px;
-
-      margin: 0 auto 10px;
+      margin: 0 auto 5px;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .chevron {
-      width: 24px;
-      height: 24px;
-      border-right: 4px solid white;
-      border-top: 4px solid white;
-      transform: rotate(-45deg) scaleY(0.6);
-    }
-
-    .chevron.down {
-      transform: rotate(135deg) scaleY(0.6);
+      overflow: visible;
     }
 
     .chevron-group {
@@ -88,6 +75,25 @@
     .chevron-group.down {
       transform: rotate(180deg);
     }
+
+    .chevron {
+      width: 24px;
+      height: 24px;
+      border-right: 4px solid white;
+      border-top: 4px solid white;
+      transform: rotate(-45deg) scaleY(0.6);
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+
+    .chevron:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(-45deg) scaleY(0.6) translateY(0); }
+      50% { transform: rotate(-45deg) scaleY(0.6) translateY(-6px); }
+    }
+
     .btn-warning:hover {
       background: #ffc107;
       transform: scale(1.05);
@@ -112,6 +118,7 @@
     <div class="arrow-toggle" onclick="toggleForm()">
       <div id="chevronGroup" class="chevron-group">
         <div class="chevron"></div>
+        <div class="chevron"></div>
       </div>
     </div>
 
@@ -119,6 +126,7 @@
       <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
         請按箭頭開啟表格填寫
       </div>
+
       <p>
         <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button">
           👉 查看抽獎活動詳情
@@ -135,6 +143,7 @@
           </ul>
         </div>
       </div>
+
       <hr />
       <form id="drawForm">
         <div class="row">
@@ -245,7 +254,7 @@
       const arrowGroup = document.getElementById('chevronGroup');
       if (!formUp) {
         form.style.top = "60px";
-        arrowGroup.classList.remove("down");
+        arrowGroup.classList.add("down");
       } else {
         form.style.top = "calc(100vh - 240px)";
         arrowGroup.classList.remove("down");
