@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>鄭伊健演唱會抽獎活動</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
-
   <style>
     html, body {
       height: 100%;
@@ -22,7 +18,8 @@
     body::before {
       content: "";
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       background: url('images/ekinform.jpg') no-repeat center top fixed;
@@ -34,8 +31,8 @@
     }
 
     @keyframes fadeInBright {
-      0%   { opacity: 0; filter: brightness(2); }
-      50%  { opacity: 1; filter: brightness(1.5); }
+      0% { opacity: 0; filter: brightness(2); }
+      50% { opacity: 1; filter: brightness(1.5); }
       100% { opacity: 1; filter: brightness(1); }
     }
 
@@ -46,9 +43,9 @@
       width: 100%;
       z-index: 3;
       background-color: rgba(30, 30, 30, 0.96);
-      padding: 10px 20px 20px;
+      padding: 40px 20px 20px;
       color: white;
-      overflow-y: visible;
+      overflow-y: auto;
       height: calc(100vh - 80px);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
@@ -57,42 +54,23 @@
 
     .arrow-toggle {
       cursor: pointer;
-      margin: 0 auto 5px;
+      margin: 0 auto 10px;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: visible;
+      width: 40px;
+      height: 40px;
     }
 
-    .chevron-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
+    .chevron-svg {
+      width: 40px;
+      height: 40px;
       transition: transform 0.4s ease;
+      fill: white;
     }
 
-    .chevron-group.down {
+    .rotate-down {
       transform: rotate(180deg);
-    }
-
-    .chevron {
-      box-sizing: content-box;
-      width: 18px;
-      height: 18px;
-      border-right: 3px solid white;
-      border-top: 3px solid white;
-      transform: rotate(-45deg) scaleY(0.6);
-      animation: bounce 1.4s infinite ease-in-out;
-    }
-
-    .chevron:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: rotate(-45deg) scaleY(0.6) translateY(0); }
-      50% { transform: rotate(-45deg) scaleY(0.6) translateY(-6px); }
     }
 
     .btn-warning:hover {
@@ -109,166 +87,159 @@
       overflow-y: scroll;
       font-size: 0.85rem;
     }
-
-    .chevron-wrapper {
-      padding: 1px;
-      overflow: visible;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Form -->
-  <div id="formContainer" class="form-container container">
-    <!-- Toggle Arrow -->
-    <div class="arrow-toggle" onclick="toggleForm()">
-      <div id="chevronGroup" class="chevron-group">
-        <div class="chevron-wrapper"><div class="chevron"></div></div>
-        <div class="chevron-wrapper"><div class="chevron"></div></div>
-      </div>
-    </div>
-
-    <div class="form-section">
-      <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
-        請按箭頭開啟表格填寫
-      </div>
-
-      <p>
-        <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button">
-          👉 查看抽獎活動詳情
-        </a>
-      </p>
-      <div class="collapse" id="eventDetails">
-        <div class="card card-body bg-dark text-white border-light">
-          <h5 class="mb-3">抽獎活動詳情</h5>
-          <ul>
-            <li>地點：The Theatre at Great Canadian Toronto</li>
-            <li>日期：2025年6月28日 晚上8:00</li>
-            <li>獎品：鄭伊健親筆簽名演唱會海報</li>
-            <li>截止日期：2025年6月15日</li>
-          </ul>
-        </div>
-      </div>
-
-      <hr />
-      <form id="drawForm">
-        <div class="row">
-          <div class="mb-3 col-md-6">
-            <label class="form-label">名字</label>
-            <input type="text" class="form-control" id="firstName" required>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label class="form-label">姓氏</label>
-            <input type="text" class="form-control" id="lastName" required>
-          </div>
-        </div>
-        <div class="row">
-          <div class="mb-3 col-md-4">
-            <label class="form-label">電話號碼</label>
-            <input type="tel" class="form-control" id="phone" required>
-          </div>
-          <div class="mb-3 col-md-8">
-            <label class="form-label">電郵地址</label>
-            <input type="email" class="form-control" id="email" required>
-          </div>
-        </div>
-        <div class="form-check mt-3">
-          <input class="form-check-input" type="checkbox" id="agreeCheck">
-          <label class="form-check-label" for="agreeCheck">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">我已閱讀並同意以上條款</a>
-          </label>
-        </div>
-        <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>提交</button>
-      </form>
-
-      <div id="thankYou" class="text-center mt-4" style="display: none;">
-        <h4>感謝您的參與！</h4>
-        <p>您的報名已成功接收，祝您好運！</p>
-      </div>
-    </div>
+<div id="formContainer" class="form-container container">
+  <!-- Toggle Arrow SVG -->
+  <div class="arrow-toggle" onclick="toggleForm()">
+    <svg id="chevronIcon" class="chevron-svg" viewBox="0 0 24 24">
+      <path d="M12 15.5L6 9.5L7.4 8.1L12 12.7L16.6 8.1L18 9.5L12 15.5ZM12 22.5L6 16.5L7.4 15.1L12 19.7L16.6 15.1L18 16.5L12 22.5Z"/>
+    </svg>
   </div>
 
-  <!-- Disclaimer Modal -->
-  <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-light text-dark">
-        <div class="modal-header">
-          <h5 class="modal-title" id="disclaimerModalLabel">抽獎活動條款</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+  <div class="form-section">
+    <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
+      請按箭頭開啟表格填寫
+    </div>
+    <p>
+      <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button">
+        👉 查看抽獎活動詳情
+      </a>
+    </p>
+    <div class="collapse" id="eventDetails">
+      <div class="card card-body bg-dark text-white border-light">
+        <h5 class="mb-3">抽獎活動詳情</h5>
+        <ul>
+          <li>地點：The Theatre at Great Canadian Toronto</li>
+          <li>日期：2025年6月28日 晚上8:00</li>
+          <li>獎品：鄭伊健親筆簽名演唱會海報</li>
+          <li>截止日期：2025年6月15日</li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <form id="drawForm">
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label class="form-label">名字</label>
+          <input type="text" class="form-control" id="firstName" required>
         </div>
-        <div class="modal-body">
-          <div class="disclaimer-box">
-            <p>參與本抽獎活動即表示您同意以下條款：</p>
-            <ol>
-              <li><strong>目的：</strong>推廣「鄭伊健 – HERE & NOW 2025」多倫多演唱會。</li>
-              <li><strong>參加資格：</strong>限居住於加拿大、年滿18歲人士，每人限報名一次。</li>
-              <li><strong>獎品：</strong>鄭伊健親筆簽名之限量演唱會海報。</li>
-              <li><strong>個人資料用途：</strong>僅用於本次抽獎活動，不會外洩或販售。</li>
-              <li><strong>中獎通知：</strong>將於2025年6月18日以電郵方式通知中獎者。</li>
-              <li><strong>主辦權利：</strong>主辦方有權隨時取消或修改活動內容，無須另行通知。</li>
-            </ol>
-          </div>
+        <div class="mb-3 col-md-6">
+          <label class="form-label">姓氏</label>
+          <input type="text" class="form-control" id="lastName" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label class="form-label">電話號碼</label>
+          <input type="tel" class="form-control" id="phone" required>
+        </div>
+        <div class="mb-3 col-md-8">
+          <label class="form-label">電郵地址</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+      </div>
+      <div class="form-check mt-3">
+        <input class="form-check-input" type="checkbox" id="agreeCheck">
+        <label class="form-check-label" for="agreeCheck">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">我已閱讀並同意以上條款</a>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-warning mt-3" id="submitBtn" disabled>提交</button>
+    </form>
+
+    <div id="thankYou" class="text-center mt-4" style="display: none;">
+      <h4>感謝您的參與！</h4>
+      <p>您的報名已成功接收，祝您好運！</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-light text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="disclaimerModalLabel">抽獎活動條款</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+      </div>
+      <div class="modal-body">
+        <div class="disclaimer-box">
+          <p>參與本抽獎活動即表示您同意以下條款：</p>
+          <ol>
+            <li><strong>目的：</strong>推廣「鄭伊健 – HERE & NOW 2025」多倫多演唱會。</li>
+            <li><strong>參加資格：</strong>限居住於加拿大、年滿18歲人士，每人限報名一次。</li>
+            <li><strong>獎品：</strong>鄭伊健親筆簽名之限量演唱會海報。</li>
+            <li><strong>個人資料用途：</strong>僅用於本次抽獎活動，不會外洩或販售。</li>
+            <li><strong>中獎通知：</strong>將於2025年6月18日以電郵方式通知中獎者。</li>
+            <li><strong>主辦權利：</strong>主辦方有權隨時取消或修改活動內容，無須另行通知。</li>
+          </ol>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Firebase & Toggle Logic -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
-      authDomain: "ldform.firebaseapp.com",
-      projectId: "ldform",
-      storageBucket: "ldform.firebasestorage.app",
-      messagingSenderId: "342526487179",
-      appId: "1:342526487179:web:bddee95d3bada6deac428e",
-      measurementId: "G-LESV793JQ0"
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
+    authDomain: "ldform.firebaseapp.com",
+    projectId: "ldform",
+    storageBucket: "ldform.firebasestorage.app",
+    messagingSenderId: "342526487179",
+    appId: "1:342526487179:web:bddee95d3bada6deac428e",
+    measurementId: "G-LESV793JQ0"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  document.getElementById('agreeCheck').addEventListener('change', function () {
+    document.getElementById('submitBtn').disabled = !this.checked;
+  });
+
+  document.getElementById('drawForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const data = {
+      firstName: document.getElementById('firstName').value,
+      lastName: document.getElementById('lastName').value,
+      phone: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      status: "New",
+      createdate: firebase.firestore.Timestamp.now(),
+      timestamp: new Date().toISOString()
     };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
 
-    document.getElementById('agreeCheck').addEventListener('change', function () {
-      document.getElementById('submitBtn').disabled = !this.checked;
-    });
-
-    document.getElementById('drawForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const data = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        status: "New",
-        createdate: firebase.firestore.Timestamp.now(),
-        timestamp: new Date().toISOString()
-      };
-
-      try {
-        await db.collection("registrations").add(data);
-        document.getElementById('drawForm').style.display = 'none';
-        document.getElementById('thankYou').style.display = 'block';
-      } catch (err) {
-        console.error("儲存失敗：", err);
-        alert("提交失敗，請稍後再試。");
-      }
-    });
-
-    let formUp = false;
-    function toggleForm() {
-      const form = document.getElementById('formContainer');
-      const arrowGroup = document.getElementById('chevronGroup');
-      if (!formUp) {
-        form.style.top = "60px";
-        arrowGroup.classList.add("down");
-      } else {
-        form.style.top = "calc(100vh - 240px)";
-        arrowGroup.classList.remove("down");
-      }
-      formUp = !formUp;
+    try {
+      await db.collection("registrations").add(data);
+      document.getElementById('drawForm').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    } catch (err) {
+      console.error("儲存失敗：", err);
+      alert("提交失敗，請稍後再試。");
     }
-  </script>
+  });
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  let formUp = false;
+  function toggleForm() {
+    const form = document.getElementById('formContainer');
+    const arrow = document.getElementById('chevronIcon');
+
+    if (!formUp) {
+      form.style.top = "60px";
+      arrow.classList.add("rotate-down");
+    } else {
+      form.style.top = "calc(100vh - 240px)";
+      arrow.classList.remove("rotate-down");
+    }
+    formUp = !formUp;
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 </body>
 </html>
