@@ -80,10 +80,9 @@
       100% { transform: rotate(-45deg) translateY(0); opacity: 1; }
     }
 
-
     .form-container {
       position: fixed;
-      top: calc(100vh - 340px); 
+      top: calc(100vh - 240px); 
       left: 0;
       width: 100%;
       z-index: 3;
@@ -91,7 +90,7 @@
       padding: 40px 20px;
       color: white;
       overflow-y: auto;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 80px);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
       transition: top 0.8s ease-out;
@@ -107,7 +106,7 @@
       color: #000000;
       padding: 15px;
       border-radius: 8px;
-      max-height: 360px;
+      max-height: 240px;
       overflow-y: scroll;
       font-size: 0.85rem;
     }
@@ -248,7 +247,7 @@
 
     function revealForm() {
       document.querySelector('.arrow-section').style.display = 'none';
-      document.getElementById('formContainer').style.top = '60px';
+      document.getElementById('formContainer').style.top = '50px';
     }
   </script>
 
