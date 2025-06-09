@@ -12,47 +12,58 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      background: #1e1e2f;
-      color: white;
+      background: black;
+      overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
-      scroll-behavior: smooth;
     }
 
-    .poster-hero {
+    .poster-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: url('images/ekinform.jpg') no-repeat center center;
+      background-size: cover;
+      filter: brightness(0.4);
+    }
+
+    .overlay-content {
       position: relative;
       height: 100vh;
-      background-color: black;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       flex-direction: column;
+      text-align: center;
+      color: white;
     }
 
-    .poster-img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-
-    .scroll-btn {
+    .arrow-down {
       position: absolute;
-      bottom: 20px;
-      background-color: rgba(255, 255, 255, 0.7);
-      color: #000;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 20px;
-      font-size: 1rem;
+      bottom: 40px;
+      font-size: 2.5rem;
+      color: white;
+      animation: bounce 1.5s infinite;
       cursor: pointer;
-      transition: transform 0.3s;
     }
 
-    .scroll-btn:hover {
-      transform: scale(1.1);
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .slide-up {
+      animation: slideUp 1s forwards;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .form-section {
@@ -82,15 +93,19 @@
 </head>
 <body>
 
-  <!-- Poster Section -->
-  <div id="posterSection" class="poster-hero">
-    <img src="images/ekinform.jpg" alt="演唱會海報" class="poster-img">
-    <button class="scroll-btn" onclick="scrollToForm()">⬆️ 開始報名</button>
+  <!-- Poster Background -->
+  <div class="poster-background"></div>
+
+  <!-- Poster Foreground Section -->
+  <div id="posterSection" class="overlay-content">
+    <h1 class="display-6">鄭伊健 HERE & NOW 2025</h1>
+    <p>多倫多演唱會抽獎報名</p>
+    <div class="arrow-down" onclick="revealForm()">⬆</div>
   </div>
 
-  <!-- Main Content Section (Hidden at first) -->
-  <div id="mainContent" class="container mt-4 animate__animated" style="display: none;">
-    <div class="form-section animate__animated animate__fadeIn">
+  <!-- Main Content Hidden Initially -->
+  <div id="mainContent" class="container mt-4" style="display: none;">
+    <div class="form-section animate__animated">
       <p>
         <a class="btn btn-outline-light btn-sm mb-3" data-bs-toggle="collapse" href="#eventDetails" role="button" aria-expanded="false" aria-controls="eventDetails">
           👉 查看抽獎活動詳情
@@ -173,7 +188,7 @@
     </div>
   </div>
 
-  <!-- Firebase + Scroll Script -->
+  <!-- Firebase + Animation Script -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB6-I9oj4hti5rsxN-dMZQdzeoXTsKX0Xg",
@@ -214,11 +229,10 @@
       }
     });
 
-    function scrollToForm() {
-      document.getElementById('posterSection').style.display = 'none';
+    function revealForm() {
       const mainContent = document.getElementById('mainContent');
       mainContent.style.display = 'block';
-      mainContent.classList.add('animate__fadeInUp');
+      mainContent.classList.add('slide-up');
     }
   </script>
 
