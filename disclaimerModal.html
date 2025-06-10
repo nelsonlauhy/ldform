@@ -1,23 +1,47 @@
-<!-- disclaimerModal.html -->
-<div class="modal fade" id="disclaimerModal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content bg-light text-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">抽獎活動條款</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
-      </div>
-      <div class="modal-body">
-        <div class="disclaimer-box">
-          <ol>
-            <li><strong>目的：</strong>推廣演唱會</li>
-            <li><strong>資格：</strong>年滿18歲，加拿大居民</li>
-            <li><strong>獎品：</strong>簽名海報</li>
-            <li><strong>資料用途：</strong>僅限活動聯絡</li>
-            <li><strong>通知方式：</strong>將以電郵通知中獎者</li>
-            <li><strong>主辦權利：</strong>有權修改活動</li>
-          </ol>
-        </div>
+
+<div class="modal fade" id="disclaimerModal" tabindex="-1"> 
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingDisclaimer">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDisclaimer">
+        ⚠️ 查看免責聲明
+      </button>
+    </h2>
+    <div id="collapseDisclaimer" class="accordion-collapse collapse" data-bs-parent="#accordionDisclaimer">
+      <div class="accordion-body">
+        <ol class="ps-4 mb-0">
+          <li class="mb-3">
+            <div class="ps-3">
+              <strong>活動目的</strong>
+              <div class="ps-4">本抽獎活動之舉辦僅為推廣活動，無需購買產品或付款即可參加。</div>
+            </div>
+          </li>
+          <li class="mb-3">
+            <div class="ps-3">
+              <strong>參加資格</strong>
+              <div class="ps-4">參加者須為年滿18歲之加拿大居民。主辦單位有權要求提供年齡或居住證明。</div>
+            </div>
+          </li>
+          <li class="mb-3">
+            <div class="ps-3">
+              <strong>資料使用</strong>
+              <div class="ps-4">參加者所提供之個人資料僅用於抽獎及通知用途，不會作其他商業用途。</div>
+            </div>
+          </li>
+          <li class="mb-3">
+            <div class="ps-3">
+              <strong>獎品更動</strong>
+              <div class="ps-4">如遇不可抗力，主辦單位保留更改獎品或活動內容之權利，恕不另行通知。</div>
+            </div>
+          </li>
+          <li>
+            <div class="ps-3">
+              <strong>最終解釋權</strong>
+              <div class="ps-4">本活動一切相關事宜，以主辦單位最終解釋為準。</div>
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
   </div>
 </div>
+
