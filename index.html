@@ -110,21 +110,21 @@
         <div class="row">
           <div class="mb-3 col-12 col-md-6">
             <label class="form-label">名字</label>
-            <input type="text" class="form-control" id="firstName" required>
+            <input type="text" class="form-control" id="firstName" required placeholder="請輸入名字">
           </div>
           <div class="mb-3 col-12 col-md-6">
             <label class="form-label">姓氏</label>
-            <input type="text" class="form-control" id="lastName" required>
+            <input type="text" class="form-control" id="lastName" required placeholder="請輸入姓氏">
           </div>
         </div>
         <div class="row">
           <div class="mb-3 col-md-4">
             <label class="form-label">電話號碼</label>
-            <input type="tel" class="form-control" id="phone" required>
+            <input type="tel" class="form-control" id="phone" required placeholder="請輸入電話號碼">
           </div>
           <div class="mb-3 col-md-8">
             <label class="form-label">電郵地址</label>
-            <input type="email" class="form-control" id="email" required>
+            <input type="email" class="form-control" id="email" required placeholder="請輸入電郵地址">
           </div>
         </div>
         <div class="form-check mt-3">
@@ -168,6 +168,31 @@
 
     document.getElementById('agreeCheck').addEventListener('change', function () {
       document.getElementById('submitBtn').disabled = !this.checked;
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById('drawForm');
+      const fields = form.querySelectorAll('input[required]');
+
+      // 加入繁體中文錯誤提示
+      fields.forEach(field => {
+        field.addEventListener('invalid', function (e) {
+          e.preventDefault();
+          if (!field.validity.valid) {
+            if (field.type === 'email') {
+              field.setCustomValidity('請輸入有效的電郵地址');
+            } else if (field.type === 'tel') {
+              field.setCustomValidity('請輸入電話號碼');
+            } else {
+              field.setCustomValidity('此為必填欄位');
+            }
+          }
+        });
+
+        field.addEventListener('input', function () {
+          field.setCustomValidity('');
+        });
+      });
     });
 
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
