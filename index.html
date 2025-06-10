@@ -172,7 +172,7 @@
 
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const email = document.getElementById('email').value;
+      const email = document.getElementById('email').value.toLowerCase();  // 確保轉小寫
       const data = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
@@ -184,18 +184,20 @@
       };
 
       try {
-        // 🔍 先查詢是否已存在相同 email
-        const snapshot = await db.collection("registrations").where("email", "==", email.toLowerCase()).get();
+        const snapshot = await db.collection("registrations").where("email", "==", email).get();
+        console.log("檢查 email:", email);
+        console.log("Snapshot empty?", snapshot.empty);
+
         if (!snapshot.empty) {
           alert("此電郵地址已參加過活動，請勿重複提交。");
           return;
         }
 
-        // ✅ 如果沒有重複，就新增紀錄
         await db.collection("registrations").add(data);
         document.getElementById('drawForm').style.display = 'none';
         document.getElementById('thankYou').style.display = 'block';
       } catch (err) {
+        console.error("提交時錯誤:", err);
         alert("提交失敗，請稍後再試。");
       }
     });
