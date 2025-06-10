@@ -197,7 +197,11 @@
 
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const email = document.getElementById('email').value.toLowerCase();  // 確保轉小寫
+
+      // ✅ 強制觸發欄位驗證錯誤訊息（避免錯過）
+      if (!e.target.reportValidity()) return;
+
+      const email = document.getElementById('email').value.toLowerCase();
       const data = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
@@ -210,9 +214,6 @@
 
       try {
         const snapshot = await db.collection("registrations").where("email", "==", email).get();
-        console.log("檢查 email:", email);
-        console.log("Snapshot empty?", snapshot.empty);
-
         if (!snapshot.empty) {
           alert("此電郵地址已參加過活動，請勿重複提交。");
           return;
@@ -226,6 +227,7 @@
         alert("提交失敗，請稍後再試。");
       }
     });
+
 
     let formUp = false;
     function toggleForm() {
