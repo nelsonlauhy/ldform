@@ -19,8 +19,8 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: url('images/ekinform4.jpg') no-repeat center top fixed;
-      background-size: 95% auto;
+      background: url('images/ekinform4.jpg') no-repeat center top;
+      background-size: cover;
       z-index: 0;
       opacity: 0;
       filter: brightness(2);
@@ -108,11 +108,11 @@
 
       <form id="drawForm">
         <div class="row">
-          <div class="mb-3 col-6">
+          <div class="mb-3 col-12">
             <label class="form-label">名字</label>
             <input type="text" class="form-control" id="firstName" required placeholder="請輸入名字">
           </div>
-          <div class="mb-3 col-6">
+          <div class="mb-3 col-12">
             <label class="form-label">姓氏</label>
             <input type="text" class="form-control" id="lastName" required placeholder="請輸入姓氏">
           </div>
@@ -171,10 +171,9 @@
       submitBtn.disabled = !this.checked;
 
       if (this.checked) {
-        // ✅ 立刻檢查所有欄位，有錯就彈出提示
         const form = document.getElementById('drawForm');
         if (!form.checkValidity()) {
-          form.reportValidity(); // << 關鍵
+          form.reportValidity();
         }
       }
     });
@@ -184,7 +183,6 @@
       const fields = form.querySelectorAll('input[required]');
 
       fields.forEach(field => {
-        // 一開始先設好自定錯誤訊息
         if (!field.value) {
           if (field.type === 'email') {
             field.setCustomValidity('請輸入有效的電郵地址');
@@ -195,7 +193,6 @@
           }
         }
 
-        // 失去焦點時也設一次
         field.addEventListener('blur', function () {
           if (!field.value) {
             if (field.type === 'email') {
@@ -208,7 +205,6 @@
           }
         });
 
-        // 有輸入時清除錯誤訊息
         field.addEventListener('input', function () {
           field.setCustomValidity('');
         });
@@ -219,41 +215,6 @@
       e.preventDefault();
 
       const form = document.getElementById('drawForm');
-      if (!form.checkValidity()) return; // ✅ 不重複顯示，因為錯誤提示在 checkbox 勾選時已處理
-
-      const email = document.getElementById('email').value.toLowerCase();
-      const data = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        phone: document.getElementById('phone').value,
-        email: email,
-        status: "New",
-        createdate: firebase.firestore.Timestamp.now(),
-        timestamp: new Date().toISOString()
-      };
-
-      try {
-        const snapshot = await db.collection("registrations").where("email", "==", email).get();
-        if (!snapshot.empty) {
-          alert("此電郵地址已參加過活動，請勿重複提交。");
-          return;
-        }
-
-        await db.collection("registrations").add(data);
-        form.style.display = 'none';
-        document.getElementById('thankYou').style.display = 'block';
-      } catch (err) {
-        console.error("提交時錯誤:", err);
-        alert("提交失敗，請稍後再試。");
-      }
-    });
-
-
-    document.getElementById('drawForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const form = document.getElementById('drawForm');
-
-      // ✅ 強制檢查欄位並顯示錯誤訊息（解決你看不到警告的問題）
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
@@ -278,7 +239,7 @@
         }
 
         await db.collection("registrations").add(data);
-        document.getElementById('drawForm').style.display = 'none';
+        form.style.display = 'none';
         document.getElementById('thankYou').style.display = 'block';
       } catch (err) {
         console.error("提交時錯誤:", err);
