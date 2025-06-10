@@ -98,7 +98,7 @@
 
     <div class="form-section">
       <div class="text-center text-white" style="font-size: 0.9rem; margin-bottom: 8px;">
-        按此填寫參加表格
+        按此填寫抽獎表格
       </div>
       
       <hr class="text-white" style="margin-top: 40px; margin-bottom: 50px; border-color: white; opacity: 0.3;">
@@ -172,16 +172,26 @@
 
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
       e.preventDefault();
+      const email = document.getElementById('email').value;
       const data = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
         phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
+        email: email,
         status: "New",
         createdate: firebase.firestore.Timestamp.now(),
         timestamp: new Date().toISOString()
       };
+
       try {
+        // 🔍 先查詢是否已存在相同 email
+        const snapshot = await db.collection("registrations").where("email", "==", email.toLowerCase()).get();
+        if (!snapshot.empty) {
+          alert("此電郵地址已參加過活動，請勿重複提交。");
+          return;
+        }
+
+        // ✅ 如果沒有重複，就新增紀錄
         await db.collection("registrations").add(data);
         document.getElementById('drawForm').style.display = 'none';
         document.getElementById('thankYou').style.display = 'block';
