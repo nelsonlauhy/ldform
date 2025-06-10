@@ -236,38 +236,6 @@
       });
     });
 
-    document.getElementById('drawForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const form = document.getElementById('drawForm');
-      if (!form.checkValidity()) return; // ✅ 不重複顯示，因為錯誤提示在 checkbox 勾選時已處理
-
-      const email = document.getElementById('email').value.toLowerCase();
-      const data = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        phone: document.getElementById('phone').value,
-        email: email,
-        status: "New",
-        createdate: firebase.firestore.Timestamp.now(),
-        timestamp: new Date().toISOString()
-      };
-
-      try {
-        const snapshot = await db.collection("registrations").where("email", "==", email).get();
-        if (!snapshot.empty) {
-          alert("此電郵地址已參加過活動，請勿重複提交。");
-          return;
-        }
-
-        await db.collection("registrations").add(data);
-        form.style.display = 'none';
-        document.getElementById('thankYou').style.display = 'block';
-      } catch (err) {
-        console.error("提交時錯誤:", err);
-        alert("提交失敗，請稍後再試。");
-      }
-    });
 
 
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
