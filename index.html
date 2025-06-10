@@ -197,9 +197,13 @@
 
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
       e.preventDefault();
+      const form = document.getElementById('drawForm');
 
-      // ✅ 強制觸發欄位驗證錯誤訊息（避免錯過）
-      if (!e.target.reportValidity()) return;
+      // ✅ 強制檢查欄位並顯示錯誤訊息（解決你看不到警告的問題）
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
       const email = document.getElementById('email').value.toLowerCase();
       const data = {
@@ -227,7 +231,6 @@
         alert("提交失敗，請稍後再試。");
       }
     });
-
 
     let formUp = false;
     function toggleForm() {
