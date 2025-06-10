@@ -179,6 +179,42 @@
       }
     });
 
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById('drawForm');
+      const fields = form.querySelectorAll('input[required]');
+
+      fields.forEach(field => {
+        // 一開始先設好自定錯誤訊息
+        if (!field.value) {
+          if (field.type === 'email') {
+            field.setCustomValidity('請輸入有效的電郵地址');
+          } else if (field.type === 'tel') {
+            field.setCustomValidity('請輸入電話號碼');
+          } else {
+            field.setCustomValidity('此為必填欄位');
+          }
+        }
+
+        // 失去焦點時也設一次
+        field.addEventListener('blur', function () {
+          if (!field.value) {
+            if (field.type === 'email') {
+              field.setCustomValidity('請輸入有效的電郵地址');
+            } else if (field.type === 'tel') {
+              field.setCustomValidity('請輸入電話號碼');
+            } else {
+              field.setCustomValidity('此為必填欄位');
+            }
+          }
+        });
+
+        // 有輸入時清除錯誤訊息
+        field.addEventListener('input', function () {
+          field.setCustomValidity('');
+        });
+      });
+    });
+
     document.getElementById('drawForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
